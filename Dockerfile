@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-jammy
+FROM ibm-semeru-runtimes:open-20-jre-jammy
 
 LABEL author="Josscoder" maintainer="josscoder@brawn.cloud"
 
