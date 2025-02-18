@@ -30,12 +30,9 @@ else
     export AIKAR_FLAGS_SCRIPT=""
 fi
 
-# Set the startup command
-export STARTUP="java -Xms128M -Xmx${SERVER_MEMORY}G ${AIKAR_FLAGS_SCRIPT} -jar ${SERVER_JARFILE}"
-
 # Replace Startup Variables
 MODIFIED_STARTUP=$(eval echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 # Run the Server with correct parameters
-eval "${STARTUP}"
+eval "${MODIFIED_STARTUP}"
