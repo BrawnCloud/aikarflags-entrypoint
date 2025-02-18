@@ -30,9 +30,15 @@ else
     export AIKAR_FLAGS_SCRIPT=""
 fi
 
+# Export AIKAR_FLAGS_SCRIPT to .env file for Pterodactyl
+echo "AIKAR_FLAGS_SCRIPT=${AIKAR_FLAGS_SCRIPT}" > /home/container/.env
+
 # Replace Startup Variables
 MODIFIED_STARTUP=$(eval echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
-# Run the Server with correct parameters
+# Load environment variables and run the server with correct parameters
+set -o allexport
+source /home/container/.env
+set +o allexport
 eval "${MODIFIED_STARTUP}"
