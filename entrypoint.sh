@@ -27,8 +27,8 @@ case "${SERVER_MEMORY}" in
 esac
 
 # Replace Startup Variables
-MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
+MODIFIED_STARTUP=$(eval echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
-# Run the Server
-eval ${MODIFIED_STARTUP}
+# Run the Server with correct parameters
+eval "java -Xms128M -Xmx${SERVER_MEMORY}G ${AIKAR_FLAGS_SCRIPT} -jar ${SERVER_JARFILE}"
