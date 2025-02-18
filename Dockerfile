@@ -1,13 +1,18 @@
+# ----------------------------------
+# Pterodactyl Core Dockerfile
+# Environment: Java
+# Minimum Panel Version: 0.6.0
+# ----------------------------------
 FROM ibm-semeru-runtimes:open-20-jre-jammy
 
-LABEL author="Josscoder" maintainer="josscoder@brawn.cloud"
+LABEL  Pterodactyl Software, <support@pterodactyl.io>
 
-RUN apt-get -f install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 jq
-
-RUN adduser --disabled-password --home /home/container container
+RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig \
+      && adduser --disabled-password --home /home/container container
 
 USER container
 ENV  USER=container HOME=/home/container
+
 WORKDIR /home/container
 
 COPY ./entrypoint.sh /entrypoint.sh
