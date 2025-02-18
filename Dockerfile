@@ -3,9 +3,9 @@
 # Environment: Java
 # Minimum Panel Version: 0.6.0
 # ----------------------------------
-FROM ibm-semeru-runtimes:open-20-jre-jammy
+FROM openjdk:8-jdk-alpine
 
-LABEL  Pterodactyl Software, <support@pterodactyl.io>
+LABEL Pterodactyl Software, <support@pterodactyl.io>
 
 RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig \
       && adduser --disabled-password --home /home/container container
