@@ -3,22 +3,18 @@
 # Environment: Java (glibc support)
 # Minimum Panel Version: 0.6.0
 # ----------------------------------
-FROM        eclipse-temurin:21-jdk-jammy
+FROM eclipse-temurin:21-jdk-jammy
 
-LABEL       author="Michael Parker" maintainer="parker@pterodactyl.io"
+LABEL author="Michael Parker" maintainer="parker@pterodactyl.io"
 
-RUN 		apt-get update -y \
-      && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 jq \
+RUN apt update -y \
+      && apt install -y curl ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 libfreetype6 \
       && useradd -d /home/container -m container
 
 USER container
-ENV  USER=container HOME=/home/container
+ENV USER=container HOME=/home/container
+WORKDIR /home/container
 
-USER        container
-ENV         USER=container HOME=/home/container
+COPY ./entrypoint.sh /entrypoint.sh
 
-WORKDIR     /home/container
-
-COPY        ./entrypoint.sh /entrypoint.sh
-
-CMD         ["/bin/bash", "/entrypoint.sh"]
+CMD ["/bin/bash", "/entrypoint.sh"]
